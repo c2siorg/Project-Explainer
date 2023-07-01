@@ -1,1 +1,1 @@
-from summarize import Explainer
+from .summarize import Explainer
