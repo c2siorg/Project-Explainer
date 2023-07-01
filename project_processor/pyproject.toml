@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "project_processor"
+description = "github repo file level processor utils"
+readme = "README.md"
+requires-python = ">=3.7"
+license = {text = "Apache 2.0"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+]
+dependencies = ["setuptools>=42", "wheel", "gitpython", "markdown2", "spacy"]
+
+dynamic = ["version"]
+
+[tool.setuptools]
+py-modules = ["project_processor"]
