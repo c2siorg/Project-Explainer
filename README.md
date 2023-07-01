@@ -17,7 +17,7 @@ pip install git+https://github.com/c2siorg/Project-Explainer.git@main#subdirecto
 
 #### Example usage
 
-```
+```python
 from project_explainer import Explainer
 
 gptExplainer = Explainer("gpt2")
@@ -44,7 +44,7 @@ pip install git+https://github.com/c2siorg/Project-Explainer.git@main#subdirecto
 
 #### Example usage
 
-```
+```python
 from project_processor import download_github_repo, extract_headings_with_paragraphs_from_markdown, get_files_by_extension
 
 git_url = "https://github.com/c2siorg/Project-Explainer.git"
