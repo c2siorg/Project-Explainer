@@ -13,4 +13,8 @@ from .file_utils import (extract_code_blocks_from_markdown,
                          convert_markdown_file_to_html,
                          convert_markdown_to_html,
                          check_phrase_similarity_using_spacyweb,
-                         check_similarity)
+                         check_similarity,
+                         remove_code_blocks_from_markdown,
+                         remove_images_from_markdown,
+                         remove_links_from_markdown,
+                         remove_tables_from_markdown)
