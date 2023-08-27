@@ -32,20 +32,20 @@ print(gptExplainer.brief("https://github.com/c2siorg/Project-Explainer.git"))
 ```
 
 
-### Project Repository Utilities (project_processor py module)
+### Project Repository Utilities (gh_processor py module)
 
 A simple python module packed with utilities to process files in a project repository such as git repositories.
 
 #### Installation
 
 ```
-pip install git+https://github.com/c2siorg/Project-Explainer.git@main#subdirectory=project_processor
+pip install git+https://github.com/c2siorg/Project-Explainer.git@main#subdirectory=gh_processor
 ```
 
 #### Example usage
 
 ```python
-from project_processor import download_github_repo, extract_headings_with_paragraphs_from_markdown, get_files_by_extension
+from gh_processor import download_github_repo, extract_headings_with_paragraphs_from_markdown, get_files_by_extension
 
 git_url = "https://github.com/c2siorg/Project-Explainer.git"
 

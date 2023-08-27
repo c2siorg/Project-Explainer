@@ -1,4 +1,4 @@
-from project_processor import download_github_repo, extract_headings_with_paragraphs_from_markdown, get_files_by_extension
+from gh_processor import download_github_repo, extract_headings_with_paragraphs_from_markdown, get_files_by_extension
 
 git_url = "https://github.com/c2siorg/Project-Explainer.git"
 

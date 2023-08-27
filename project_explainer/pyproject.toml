@@ -3,7 +3,7 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "project_explainer"
+name = "gh_explainer"
 description = "explains a give github repo"
 readme = "README.md"
 requires-python = ">=3.7"
@@ -16,4 +16,4 @@ dependencies = ["setuptools>=42", "wheel", "transformers", "jinja2", "torch"]
 dynamic = ["version"]
 
 [tool.setuptools]
-py-modules = ["project_explainer"]
+py-modules = ["gh_explainer"]

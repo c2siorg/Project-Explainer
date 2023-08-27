@@ -1,6 +1,6 @@
 
 from transformers import AutoTokenizer, AutoModelForCausalLM, AutoModelForSeq2SeqLM
-from project_processor import (download_github_repo, 
+from gh_processor import (download_github_repo, 
                                extract_project_description_from_readme, 
                                extract_headings_with_paragraphs_from_markdown,
                                remove_tables_from_markdown,

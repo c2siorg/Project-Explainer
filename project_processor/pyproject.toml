@@ -3,7 +3,7 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "project_processor"
+name = "gh_processor"
 description = "github repo file level processor utils"
 readme = "README.md"
 requires-python = ">=3.7"
@@ -16,4 +16,4 @@ dependencies = ["setuptools>=42", "wheel", "gitpython", "markdown2", "spacy"]
 dynamic = ["version"]
 
 [tool.setuptools]
-py-modules = ["project_processor"]
+py-modules = ["gh_processor"]
