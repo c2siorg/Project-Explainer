@@ -5,6 +5,6 @@ A simple python module packed with utilities to process files in a project repos
 ## Installation
 
 ```
-pip install git+https://github.com/c2siorg/Project-Explainer.git@main#subdirectory=project_processor
+pip install git+https://github.com/c2siorg/Project-Explainer.git@main#subdirectory=gh_processor
 ```
 

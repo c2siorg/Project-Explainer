@@ -1,0 +1,3 @@
+gradio
+-e git+https://github.com/c2siorg/Project-Explainer.git@main#subdirectory=gh_processor
+-e git+https://github.com/c2siorg/Project-Explainer.git@main#subdirectory=gh_explainer
