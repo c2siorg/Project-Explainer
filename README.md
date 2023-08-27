@@ -1,4 +1,4 @@
-<div align="center"><picture>
+<div align="center">
   <img alt="project explainer" src="static/logos/logo.svg" width=300>
 
 [Project Explainer (as module)](#project-explainer-as-module) •
