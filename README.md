@@ -12,7 +12,7 @@ A python module that is capable of providing different levels of summary for the
 #### Installation
 
 ```
-pip install git+https://github.com/c2siorg/Project-Explainer.git@main#subdirectory=project_explainer
+pip install git+https://github.com/c2siorg/Project-Explainer.git@main#subdirectory=project_explainer&egg=gh_explainer
 ```
 
 #### Example usage
@@ -39,7 +39,7 @@ A simple python module packed with utilities to process files in a project repos
 #### Installation
 
 ```
-pip install git+https://github.com/c2siorg/Project-Explainer.git@main#subdirectory=gh_processor
+pip install git+https://github.com/c2siorg/Project-Explainer.git@main#subdirectory=project_processor&egg=gh_processor
 ```
 
 #### Example usage
