@@ -1,4 +1,4 @@
-from gh_explainer import Explainer
+from project_explainer.gh_explainer import Explainer
 
 gptExplainer = Explainer("gpt2")
 
