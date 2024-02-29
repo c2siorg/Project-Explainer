@@ -26,3 +26,6 @@ env/
 *.swo
 *.pyc
 .DS_Store
+
+# flagged folder
+flagged/

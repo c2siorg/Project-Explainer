@@ -1,5 +1,5 @@
 import logging
-from git import Repo
+from git import Repo, GitCommandError
 import os
 
 logger = logging.getLogger(__name__)
@@ -27,6 +27,17 @@ def download_github_repo(repo_url: str, branch: str = "main") -> str:
     """
     repo_name = repo_url.split("/")[-1].split(".")[0]
     repo_path = os.path.abspath(repo_name)
+    try:
+        Repo.clone_from(repo_url, repo_name, branch=branch)
+    except GitCommandError as e:
+        error_msg = str(e)
+        if "fatal: destination path" in error_msg and "already exists" in error_msg:
+            error_msg = f"The repository '{repo_name}' already exists on your system."
+        elif "exit code(128)" in error_msg:
+            error_msg = "Failed to clone the repository. Please check if the repository URL and branch are correct."
+        else:
+            error_msg = f"{error_msg}"
+        raise Exception(error_msg)
 
     Repo.clone_from(repo_url, repo_name, branch=branch)
 
