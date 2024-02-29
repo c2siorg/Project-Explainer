@@ -13,3 +13,9 @@ pip install -r requirements
 ```
 python ui.py
 ```
+### For Streamlit UI
+
+```
+streamlit run streamlit_ui.py
+```
+
