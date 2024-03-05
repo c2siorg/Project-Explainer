@@ -1,6 +1,3 @@
-from gh_explainer import Explainer
-import streamlit as st
-
 """
     Summarizes a GitHub project based on the provided summarization type, GitHub project URL, branch, and Hugging Face model ID.
 
@@ -13,7 +10,8 @@ import streamlit as st
     Returns:
         str: The summary of the GitHub project based on the specified summarization type.
 """
-
+from gh_explainer import Explainer
+import streamlit as st
 
 def summarize(summarization_type, github_project_url, github_project_branch="main", huggingface_model_id="gpt2"):
     gptExplainer = Explainer(huggingface_model_id)
