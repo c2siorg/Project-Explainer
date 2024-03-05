@@ -16,7 +16,7 @@ logger.addHandler(console_handler)
 
 def download_github_repo(repo_url: str, branch: str = "main") -> str:
     """
-    Download a GitHub repository from the provided URL.
+    Download a GitHub repository from the provided URL if it doesn't exist already.
 
     Args:
         repo_url (str): The URL of the GitHub repository.
@@ -28,7 +28,16 @@ def download_github_repo(repo_url: str, branch: str = "main") -> str:
     repo_name = repo_url.split("/")[-1].split(".")[0]
     repo_path = os.path.abspath(repo_name)
 
-    Repo.clone_from(repo_url, repo_name, branch=branch)
+    # Check if the repository already exists in the root directory
+    if os.path.exists(repo_path):
+        logger.info(f"Repository '{repo_name}' already exists in the root directory.")
+        return repo_path
 
-    logger.info(f"Repository '{repo_name}' downloaded successfully!")
-    return repo_path
+    try:
+        # Clone the repository
+        Repo.clone_from(repo_url, repo_name, branch=branch)
+        logger.info(f"Repository '{repo_name}' downloaded successfully!")
+        return repo_path
+    except Exception as e:
+        logger.error(f"Error downloading repository '{repo_name}': {e}")
+        return ""

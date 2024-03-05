@@ -49,7 +49,7 @@ Use project explainer as UI
 pip install -r project_explainer_ui/requirements.txt
 ```
 
-#### Example usage
+#### Example usage for Gradio
 
 ```
 python project_explainer_ui/ui.py
@@ -57,6 +57,13 @@ python project_explainer_ui/ui.py
 
 ![](static/ui.png)
 
+#### Example usage for Streamlit
+
+```
+python project_explainer_ui/streamlit_ui.py
+```
+
+![](static/s_ui.png)
 
 ### Project Repository Utilities (gh_processor py module)
 
