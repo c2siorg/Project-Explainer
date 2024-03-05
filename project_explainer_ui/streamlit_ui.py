@@ -1,4 +1,19 @@
 from gh_explainer import Explainer
+import streamlit as st
+
+"""
+    Summarizes a GitHub project based on the provided summarization type, GitHub project URL, branch, and Hugging Face model ID.
+
+    Parameters:
+        summarization_type (str): The type of summarization to perform ("brief" or "outline").
+        github_project_url (str): The URL of the GitHub project to summarize.
+        github_project_branch (str, optional): The branch of the GitHub project (default is "main").
+        huggingface_model_id (str, optional): The ID of the Hugging Face model to use for summarization (default is "gpt2").
+
+    Returns:
+        str: The summary of the GitHub project based on the specified summarization type.
+"""
+
 
 def summarize(summarization_type, github_project_url, github_project_branch="main", huggingface_model_id="gpt2"):
     gptExplainer = Explainer(huggingface_model_id)
@@ -7,7 +22,7 @@ def summarize(summarization_type, github_project_url, github_project_branch="mai
     return gptExplainer.outline(github_url=github_project_url, branch=github_project_branch)["summary"]
 
 
-import streamlit as st
+
 st.title("Github Project Explainer")
 
 if "response" not in st.session_state:
