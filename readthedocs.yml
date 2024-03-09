@@ -10,6 +10,5 @@ formats: all
 python:
   install:
     - method: pip
-      path: .
-    - method: pip
       requirements: project_explainer_ui/requirements.txt
+
