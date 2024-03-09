@@ -1,13 +1,17 @@
 version: 2
+
+# The build.os and build.tools sections are not typically used and can be omitted
 build:
-  os: "ubuntu-20.04"  # Specifies the build OS. Use only if you have specific requirements.
-  tools:
-    python: "3.12"
+   os: "ubuntu-20.04"
+   tools:
+     python: "3.12"
+
 sphinx:
-  configuration: docs/source/conf.py
+  configuration: docs/source/conf.py  # Ensure this path is correct
 formats: all
+
 python:
-  version: 3.12.2
+  version: 3.12  # Just specify the major and minor version, e.g., 3.12
   install:
     - method: pip
-    - requirements: project_explainer_ui/requirements.txt
+      requirements: project_explainer_ui/requirements.txt
