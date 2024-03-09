@@ -9,6 +9,6 @@ formats: all
 
 python:
   install:
-    - method: pip
+    - method: pip3
       requirements: project_explainer_ui/requirements.txt
 
