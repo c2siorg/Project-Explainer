@@ -4,11 +4,11 @@ build:
   tools:
     python: "3.10"
 sphinx:
-  configuration: docs/source/conf.py  # Ensure this path is correct
+  configuration: docs/source/conf.py  
 formats: all
 
 python:
-  version: 3.10  # Just specify the major and minor version, e.g., 3.12
+  version: 3.10  
   install:
     - method: pip
       requirements: project_explainer_ui/requirements.txt

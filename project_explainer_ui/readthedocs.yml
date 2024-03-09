@@ -2,6 +2,6 @@ version: 2
 sphinx:
   configuration: docs/conf.py
 python:
-  version: 3.12.2
+  version: 3.10
   install:
     - requirements: project_explainer_ui/requirements.txt
