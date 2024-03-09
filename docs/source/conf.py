@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 import os
 import sys
-sys.path.insert(0, os.path.abspath('/Users/ethanhunt/Project-Explainer'))
+sys.path.insert(0, os.path.abspath('/Users/ethanhunt/Desktop/Project-Explainer'))
 
 project = 'PROJECT-EXPLAINER'
 copyright = '2024, C2SI'
