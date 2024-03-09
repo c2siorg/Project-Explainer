@@ -10,7 +10,7 @@ sphinx:
 formats: all
 
 python:
-  version: 3.12  # Just specify the major and minor version, e.g., 3.12
+#  version: 3.12  # Just specify the major and minor version, e.g., 3.12
   install:
     - method: pip
       requirements: project_explainer_ui/requirements.txt
