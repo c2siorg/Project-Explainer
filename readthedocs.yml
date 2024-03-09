@@ -3,13 +3,13 @@ version: 2
 build:
   os: "ubuntu-20.04"
   tools:
-    Node.js: 20
+    python: "latest"
 sphinx:
   configuration: docs/source/conf.py  # Ensure this path is correct
 formats: all
 
 python:
-  version: 3  # Just specify the major and minor version, e.g., 3.12
+  version: latest  # Just specify the major and minor version, e.g., 3.12
   install:
     - method: pip
       requirements: project_explainer_ui/requirements.txt
