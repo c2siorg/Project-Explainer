@@ -2,7 +2,7 @@ version: 2
 build:
   os: "ubuntu-20.04"  # Specifies the build OS. Use only if you have specific requirements.
   tools:
-    python: "3.12.2"
+    python: "3.12"
 sphinx:
   configuration: docs/source/conf.py
 formats: all
