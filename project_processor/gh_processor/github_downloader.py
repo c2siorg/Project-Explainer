@@ -25,19 +25,22 @@ def download_github_repo(repo_url: str, branch: str = "main") -> str:
     Returns:
         repo_path (str): Absolute path to downloaded repo
     """
-        # Check if the repository directory already exists
-    if os.path.exists(repo_path):
-        logger.info(f"Repository '{repo_name}' already exists at '{repo_path}'. Skipping cloning.")
-        return repo_path
+    
     
     try:
         repo_name = repo_url.split("/")[-1].split(".")[0]
         repo_path = os.path.abspath(repo_name)
 
-        Repo.clone_from(repo_url, repo_name, branch=branch)
+        # Check if the repository directory already exists
+        if os.path.exists(repo_path):
+            logger.info(f"Repository '{repo_name}' already exists at '{repo_path}'. Skipping cloning.")
+            return repo_path
+        else:
 
-        logger.info(f"Repository '{repo_name}' downloaded successfully!")
-        return repo_path
+            Repo.clone_from(repo_url, repo_name, branch=branch)
+
+            logger.info(f"Repository '{repo_name}' downloaded successfully!")
+            return repo_path
     except Exception as e:
         logger.error(f"Error whule donwloading repository: {str(e)}")
         raise
