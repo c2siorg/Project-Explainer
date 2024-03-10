@@ -20,7 +20,7 @@ A python module that is capable of providing different levels of summary for the
 #### Installation
 
 ```
-pip install git+https://github.com/c2siorg/Project-Explainer.git@main#subdirectory=project_explainer&egg=gh_explainer
+pip install -r project_explainer/requirements.txt
 ```
 
 #### Example usage
