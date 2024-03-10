@@ -36,7 +36,7 @@ def download_github_repo(repo_url: str, branch: str = "main") -> str:
 
         Repo.clone_from(repo_url, repo_name, branch=branch)
 
-        logger.info(f"Repository '{repo_name}' downloaded successfully!")
+        logger.info(f"Repository '{repo_name}' downloaded successy!")
         return repo_path
     except Exception as e:
         logger.error(f"Error whule donwloading repository: {str(e)}")
