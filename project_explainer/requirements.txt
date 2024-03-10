@@ -1,2 +1,2 @@
--e git+https://github.com/c2siorg/Project-Explainer.git@main#subdirectory=project_explainer&egg=gh_explainer&egg=gh_explainer
--e git+https://github.com/c2siorg/Project-Explainer.git@main#subdirectory=project_processor&egg=gh_processor
+-e git+https://github.com/tharoosha/Project-Explainer.git@main#subdirectory=project_explainer&egg=gh_explainer&egg=gh_explainer
+-e git+https://github.com/tharoosha/Project-Explainer.git@main#subdirectory=project_processor&egg=gh_processor
