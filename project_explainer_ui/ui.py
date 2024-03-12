@@ -5,7 +5,7 @@ def summarize(summarization_type, github_project_url, github_project_branch="mai
     gptExplainer = Explainer(huggingface_model_id)
     if summarization_type == "brief":
         return gptExplainer.brief(github_url=github_project_url, branch=github_project_branch)["summary"]
-    return gptExplainer.outline(github_url=github_project_url, branch=github_project_branch)["summary"]
+    return gptExplainer.outline(github_url=github_project_url, branch=github_project_branch)
 
 demo = gr.Interface(
     fn=summarize,
