@@ -398,59 +398,35 @@ def get_elements_from_markdown_file(file_path: str, elements: List[str]) -> Dict
     return result
 
 
-def remove_images_from_markdown(file_path: str) -> str:
+def remove_images_from_markdown(markdown_content: str) -> str:
     """
     Removes image tags from a Markdown file and returns the updated content without images.
 
     Args:
-        file_path: The path to the Markdown file.
+        markdown_content: The Markdown content that will be processed.
 
     Returns:
         The Markdown content without images.
 
-    Raises:
-        ValueError: If the provided file is not a Markdown file or if the file does not exist.
     """
-
-    if not file_path.lower().endswith('.md'):
-        raise ValueError(
-            "Invalid file. Only Markdown files (.md) are supported.")
-
-    if not os.path.isfile(file_path):
-        raise ValueError("File not found.")
-
-    with open(file_path, 'r') as f:
-        markdown_content = f.read()
-
+    
     markdown_content_without_images = re.sub(
         '!\[.*?\]\(.*?\)', '', markdown_content)
 
     return markdown_content_without_images
 
 
-def remove_links_from_markdown(file_path: str) -> str:
+def remove_links_from_markdown(markdown_content: str) -> str:
     """
     Removes link tags from a Markdown file and returns the updated content.
 
     Args:
-        file_path: The path to the Markdown file.
+        markdown_content: The Markdown content that will be processed.
 
     Returns:
         The Markdown content without links.
 
-    Raises:
-        ValueError: If the provided file is not a Markdown file or if the file does not exist.
     """
-
-    if not file_path.lower().endswith('.md'):
-        raise ValueError(
-            "Invalid file. Only Markdown files (.md) are supported.")
-
-    if not os.path.isfile(file_path):
-        raise ValueError("File not found.")
-
-    with open(file_path, 'r') as f:
-        markdown_content = f.read()
 
     markdown_content_without_links = re.sub(
         '\[.*?\]\(.*?\)', '', markdown_content)
@@ -458,29 +434,17 @@ def remove_links_from_markdown(file_path: str) -> str:
     return markdown_content_without_links
 
 
-def remove_code_blocks_from_markdown(file_path: str) -> str:
+def remove_code_blocks_from_markdown(markdown_content: str) -> str:
     """
     Removes code blocks from a Markdown file and returns the updated content.
 
     Args:
-        file_path: The path to the Markdown file.
+        markdown_content: The Markdown content that will be processed.
 
     Returns:
         The Markdown content without code blocks.
 
-    Raises:
-        ValueError: If the provided file is not a Markdown file or if the file does not exist.
     """
-
-    if not file_path.lower().endswith('.md'):
-        raise ValueError(
-            "Invalid file. Only Markdown files (.md) are supported.")
-
-    if not os.path.isfile(file_path):
-        raise ValueError("File not found.")
-
-    with open(file_path, 'r') as f:
-        markdown_content = f.read()
 
     markdown_content_without_code_blocks = re.sub(
         '```[\s\S]*?```', '', markdown_content)
@@ -488,29 +452,17 @@ def remove_code_blocks_from_markdown(file_path: str) -> str:
     return markdown_content_without_code_blocks
 
 
-def remove_tables_from_markdown(file_path: str) -> str:
+def remove_tables_from_markdown(markdown_content: str) -> str:
     """
     Removes tables from a Markdown file and returns the updated content.
 
     Args:
-        file_path: The path to the Markdown file.
+        markdown_content: The Markdown content that will be processed.
 
     Returns:
         The Markdown content without tables.
 
-    Raises:
-        ValueError: If the provided file is not a Markdown file or if the file does not exist.
     """
-
-    if not file_path.lower().endswith('.md'):
-        raise ValueError(
-            "Invalid file. Only Markdown files (.md) are supported.")
-
-    if not os.path.isfile(file_path):
-        raise ValueError("File not found.")
-
-    with open(file_path, 'r') as f:
-        markdown_content = f.read()
 
     markdown_content_without_tables = re.sub(
         r'\n\|.*\|\n\|.*\|\n(\|.*\|)+', '', markdown_content)
