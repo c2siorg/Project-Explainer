@@ -6,7 +6,8 @@ from gh_processor import (download_github_repo,
                                remove_tables_from_markdown,
                                remove_code_blocks_from_markdown,
                                remove_images_from_markdown,
-                               remove_links_from_markdown)
+                               remove_links_from_markdown,
+                               download_github_readme_file)
 import os
 from jinja2 import Template
 
@@ -93,8 +94,13 @@ class Explainer():
         Raises:
             ValueError: If the README.md file is not found.
         """
-        repo_path = download_github_repo(github_url, branch)
-        readme_path = os.path.join(repo_path, "README.md")
+        # Download the GitHub repository then get the README file path
+        # repo_path = download_github_repo(github_url, branch)
+        # readme_path = os.path.join(repo_path, "README.md")
+        
+        # Download the README file directly from the GitHub repository
+        readme_path = download_github_readme_file(github_url, branch)
+        
         if not os.path.exists(readme_path):
             raise ValueError("README.md not found")
         project_description = extract_project_description_from_readme(readme_path)
@@ -117,8 +123,13 @@ class Explainer():
         Raises:
             ValueError: If the README.md file is not found.
         """
-        repo_path = download_github_repo(github_url, branch)
-        readme_path = os.path.join(repo_path, "README.md")
+        # Download the GitHub repository then get the README file path
+        # repo_path = download_github_repo(github_url, branch)
+        # readme_path = os.path.join(repo_path, "README.md")
+        
+        # Download the README file directly from the GitHub repository
+        readme_path = download_github_readme_file(github_url, branch)
+        
         if not os.path.exists(readme_path):
             raise ValueError("README.md not found")
         headings_and_paras = extract_headings_with_paragraphs_from_markdown(readme_path)

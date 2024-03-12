@@ -1,4 +1,4 @@
-from .github_downloader import download_github_repo
+from .github_downloader import download_github_repo, download_github_readme_file
 
 from .file_utils import (extract_code_blocks_from_markdown,
                          extract_headings_with_paragraphs_from_markdown,
