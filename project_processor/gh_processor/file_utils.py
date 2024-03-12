@@ -133,18 +133,20 @@ def extract_headings_with_paragraphs_from_markdown(file_path: str) -> dict:
 
     with open(file_path, "r") as file:
         content = file.read()
-        heading_pattern = r"#+\s(.+)"
+        heading_pattern = re.compile(r"^#+\s+(.+)$", re.MULTILINE)
         matches = re.findall(heading_pattern, content)
-
+            
         for match in matches:
             heading = match
-            next_line_index = content.index(match) + len(match) + 1
-            next_line = content[next_line_index:].strip()
-
-            if next_line.startswith("#"):
-                paragraph = ""
+            paragraph_start_index = content.index(match) + len(match) + 1
+            rest_content = content[paragraph_start_index:].strip()
+            next_heading = re.search(heading_pattern, rest_content)
+            if next_heading is None:
+                paragraph_end_index = len(content)
             else:
-                paragraph = next_line
+                paragraph_end_index = next_heading.start()
+            
+            paragraph = content[paragraph_start_index:paragraph_start_index + paragraph_end_index - 1].strip()
 
             heading_paragraphs[heading] = paragraph
 
