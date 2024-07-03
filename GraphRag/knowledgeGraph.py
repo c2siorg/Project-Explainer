@@ -1,3 +1,7 @@
+"""
+This file contains the functions to build and save the KnowledgeGraph Index and save it as a pickle-file
+"""
+
 from llama_index.core import StorageContext
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.core import KnowledgeGraphIndex
@@ -43,7 +47,7 @@ def build_graph(
     return index
 
 
-def save_index(index):
+def save_index(index, output_dir_path: str = "Results/"):
     """
     serializes the index object,so that it can be loaded and used later
     Args:
@@ -52,7 +56,7 @@ def save_index(index):
     Returns:
         saves pickle file of the Grpah-Index
     """
-    os.makedirs("results", exist_ok=True)
-    with open("results/graphIndex", "wb") as f:
+    os.makedirs(output_dir_path[:-1], exist_ok=True)
+    with open(output_dir_path + "graphIndex", "wb") as f:
         pickle.dump(index, f)
     print("Index saved succesfully!")
