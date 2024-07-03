@@ -7,9 +7,12 @@ import os
 import pickle
 
 
-
-
-def build_graph(documents :str,llm: str =None,max_triplets_per_chunk: int =10,embeddings: str ="microsoft/codebert-base"):
+def build_graph(
+    documents: str,
+    llm: str = None,
+    max_triplets_per_chunk: int = 10,
+    embeddings: str = "microsoft/codebert-base",
+):
     """
     This function builds KnowledgeGraph Index that can be queried
     Args:
@@ -28,7 +31,7 @@ def build_graph(documents :str,llm: str =None,max_triplets_per_chunk: int =10,em
         documents,
         max_triplets_per_chunk=max_triplets_per_chunk,
         llm=llm,
-        embed_model =HuggingFaceEmbedding(model_name=embeddings),
+        embed_model=HuggingFaceEmbedding(model_name=embeddings),
         storage_context=storage_context,
     )
     print("KG built succesfully!")
@@ -38,6 +41,7 @@ def build_graph(documents :str,llm: str =None,max_triplets_per_chunk: int =10,em
     net.from_nx(g)
     net.show("Graph_visualization.html")
     return index
+
 
 def save_index(index):
     """
@@ -49,6 +53,6 @@ def save_index(index):
         saves pickle file of the Grpah-Index
     """
     os.makedirs("results", exist_ok=True)
-    with open('results/graphIndex', 'wb') as f:
+    with open("results/graphIndex", "wb") as f:
         pickle.dump(index, f)
     print("Index saved succesfully!")

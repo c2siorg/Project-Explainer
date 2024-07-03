@@ -5,9 +5,11 @@ from llama_index.core import Document
 from llama_index.core import Settings
 
 
-
-
-def initialize_llm(base_url: str ="http://localhost:11434",model: str ="llama3",chunk_size: int = 512):
+def initialize_llm(
+    base_url: str = "http://localhost:11434",
+    model: str = "llama3",
+    chunk_size: int = 512,
+):
     """
     Initializes the llm for building the KnowledgeGraph
     Args:
@@ -18,12 +20,13 @@ def initialize_llm(base_url: str ="http://localhost:11434",model: str ="llama3",
     Returns:
         None
     """
-    llm = Ollama(base_url=base_url,model=model)
+    llm = Ollama(base_url=base_url, model=model)
     Settings.llm = llm
     Settings.chunk_size = chunk_size
     print(f"{model} initialized succesfully!")
 
-def code_spiltting(documents,language: str = "python"):
+
+def code_spiltting(documents, language: str = "python"):
     """
     If the KnowledgeGraph is to be built for code-files then files are splitted using this function
     Args:
@@ -43,6 +46,7 @@ def code_spiltting(documents,language: str = "python"):
     print(f"{len(nodes)} nodes created succesfully!")
     return nodes
 
+
 def convert_nodes_to_docs(nodes):
     """
     converts llama-index Nodes Type object to llama-index Document Type objects
@@ -51,11 +55,18 @@ def convert_nodes_to_docs(nodes):
     Returns:
         lama-index Document Type objects
     """
-    documents_from_nodes = [Document(text=node.text, metadata=node.metadata) for node in nodes]
-    print(f"{len(documents_from_nodes)} number of documents are being converted successfully!")
+    documents_from_nodes = [
+        Document(text=node.text, metadata=node.metadata) for node in nodes
+    ]
+    print(
+        f"{len(documents_from_nodes)} number of documents are being converted successfully!"
+    )
     return documents_from_nodes
 
-def load_directory(directory_path: str,code_file: bool = False,language: str = "python"):
+
+def load_directory(
+    directory_path: str, code_file: bool = False, language: str = "python"
+):
     """
     Loads the documentation-directory, does preprocessing and chunking depending on code_file parameter
     Args:
@@ -69,12 +80,10 @@ def load_directory(directory_path: str,code_file: bool = False,language: str = "
     documents = SimpleDirectoryReader(directory_path).load_data()
 
     if code_file:
-        nodes=code_spiltting(documents,language)
-        docs=convert_nodes_to_docs(nodes)
+        nodes = code_spiltting(documents, language)
+        docs = convert_nodes_to_docs(nodes)
         print(f"{len(documents)}Documents loaded succesfully!")
         return docs
 
     print(f"{len(documents)}Documents loaded succesfully!")
     return documents
-
-
