@@ -1,3 +1,7 @@
+"""
+file calls series of functions from GraphRag to build knowledge graph
+"""
+
 from tools import initialize_llm, load_directory
 from knowledgeGraph import build_graph, save_index
 

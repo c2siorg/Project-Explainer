@@ -1,3 +1,10 @@
+"""
+This file contains functions for initializing llm for
+1. building KnowledgeGraph
+2. loading documents from directory(also function for splitting code files)
+3. converting llama-index Node to llama-index Documents
+"""
+
 from llama_index.llms.ollama import Ollama
 from llama_index.core import SimpleDirectoryReader
 from llama_index.core.node_parser import CodeSplitter
