@@ -1,5 +1,5 @@
 """
-file calls series of functions from GraphRag to build knowledge graph
+file calls series of functions from graph_rag to build knowledge graph
 """
 
 from tools import initialize_llm, load_directory
