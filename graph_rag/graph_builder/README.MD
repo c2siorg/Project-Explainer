@@ -63,4 +63,4 @@ index = build_graph(documents)
 save_index(index)
 ```
 following example can referred for detailed implementation
-[GraphRag Example Notebook](graph_rag/graph_builder/Example/GraphRagExample.ipynb)
+[GraphRag Example Notebook](Example/GraphRagExample.ipynb)
