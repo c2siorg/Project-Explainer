@@ -2,7 +2,7 @@
 This file contains methods for loading graph_index from pkl file and retrieval of graph_index
 """
 
-from graph_rag.graph_builder.tools import initialize_llm
+from ..graph_builder.tools import initialize_llm
 import pickle
 
 
@@ -82,7 +82,8 @@ def graph_query(query: str, query_engine):
 
     try:
         response = query_engine.query(query)
-        return response.response
+        print(response.response)
+        return response
     except Exception as e:
         print(f"An error occurred while querying: {e}")
         raise
