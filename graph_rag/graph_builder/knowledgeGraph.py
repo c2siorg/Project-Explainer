@@ -16,6 +16,7 @@ def build_graph(
     llm: str = None,
     max_triplets_per_chunk: int = 10,
     embeddings: str = "microsoft/codebert-base",
+    include_embeddings: bool = False,
 ):
     """
     This function builds KnowledgeGraph Index that can be queried
@@ -37,6 +38,7 @@ def build_graph(
             llm=llm,
             embed_model=HuggingFaceEmbedding(model_name=embeddings),
             storage_context=storage_context,
+            include_embeddings=include_embeddings,
         )
         print("KG built successfully!")
 
