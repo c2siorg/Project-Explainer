@@ -21,18 +21,18 @@ The idea is to separate code blocks or take code and split it using a code split
 
 We need a model that is open source and can work on the free Colab version to begin with. For a better knowledge graph, we quantized models above 20GB to 4 bits using bitsandbytes configuration. We tried the following LLMs:
 - gemini pro
-- [QuantiPhy/zephyr-7b-beta(4bit-quantized)*](https://huggingface.co/QuantiPhy/zephyr-7b-beta-4bit-quantized)
+- [QuantiPhy/zephyr-7b-beta(4bit-quantized)**](https://huggingface.co/QuantiPhy/zephyr-7b-beta-4bit-quantized)
 - llama3 (Ollama version)
 - codellama (Ollama version)
-- [QuantiPhy/aya-23-8B (4bit quantized)*](https://huggingface.co/QuantiPhy/aya-23-8B-4bq)
-- gpt-neo-2.7B(4bit-quantized)*
-- [Salesforce/codegen2-7B_P(4bit-quantized)*](https://huggingface.co/QuantiPhy/Salesforce_codegen2-7B_P)
+- [QuantiPhy/aya-23-8B (4bit quantized)**](https://huggingface.co/QuantiPhy/aya-23-8B-4bq)
+- gpt-neo-2.7B(4bit-quantized)
+- [Salesforce/codegen2-7B_P(4bit-quantized)**](https://huggingface.co/QuantiPhy/Salesforce_codegen2-7B_P)
 - phi3 (Ollama)
 - phi3:medium (Ollama)
 - neural-chat (Ollama)
 - gemma2 (Ollama)
-- mistral (Ollama)
-* all this models,I have quantized them using bitsandbyted
+- mistral (Ollama)   
+** all these models,I have 4bit-quantized them using bitsandbytes
 ### Embeddings
 
 For embeddings, we tried:
