@@ -1,3 +1,7 @@
+"""
+This file contains PROMPTS that are passed to llms to generate and critique Test-Dataset for Graph_Rag
+"""
+
 QA_generation_prompt = """
 Your task is to write a factoid question and an answer given a context.
 Your factoid question should be answerable with a specific, concise piece of factual information from the context.
