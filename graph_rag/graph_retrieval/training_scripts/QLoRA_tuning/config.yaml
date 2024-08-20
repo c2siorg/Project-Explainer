@@ -1,0 +1,35 @@
+MODEL:
+  MODEL: "codellama/CodeLlama-7b-Instruct-hf"
+  SEQ_LENGTH: 2048
+  LOAD_IN_8BIT: False
+
+DATA:
+  REPO_PATH: '/content/keras-io/templates'
+  SEED: 0
+  EXTENSIONS: [ 'md' ]
+  OUTPUT_FILE: 'merged_output.txt'# Column name containing the code content
+
+TRAINING_ARGUMENTS:
+  BATCH_SIZE: 64
+  GR_ACC_STEPS: 1
+  LR: 5e-4
+  LR_SCHEDULER_TYPE: "cosine"
+  WEIGHT_DECAY: 0.01
+  NUM_WARMUP_STEPS: 30
+  EVAL_FREQ: 100
+  SAVE_FREQ: 100
+  LOG_FREQ: 10
+  OUTPUT_DIR:
+  BF16: True
+  FP16: False
+
+LORA:
+  LORA_R: 8
+  LORA_ALPHA: 32
+  LORA_DROPOUT: 0.0
+  LORA_TARGET_MODULES:
+
+BNB_CONFIG:
+  USE_NESTED_QUANT: True
+  BNB_4BIT_COMPUTE_DTYPE: "bfloat16"
+
