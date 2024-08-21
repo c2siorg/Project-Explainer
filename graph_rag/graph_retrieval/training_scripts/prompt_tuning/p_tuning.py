@@ -1,3 +1,4 @@
+import argparse
 import yaml
 import os
 import glob
@@ -88,7 +89,13 @@ def create_trainer(config, train_data, data_collator, model):
 
 
 def main():
-    with open("config.yaml", "r") as file:
+    parser = argparse.ArgumentParser(description="Training script for PEFT model")
+    parser.add_argument(
+        "--config",type=str,required=True, help="Path to the YAML configuration file"
+    )
+    args=parser.parse_args()
+
+    with open(args.config, "r") as file:
         config = yaml.safe_load(file)
 
     content = prepare_data(config["Data"]["repo_path"], config["Data"]["extensions"], config["Data"]["output_file"])
