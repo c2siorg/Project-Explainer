@@ -13,7 +13,9 @@ def prepare_data(repo_path, extensions, output_file):
 
     files = []
     for ext in extensions:
-        files.extend(glob.glob(os.path.join(repo_path, "**", f"*.{ext}"), recursive=True))
+        files.extend(
+            glob.glob(os.path.join(repo_path, "**", f"*.{ext}"), recursive=True)
+        )
 
     with open(output_file, "w", encoding="utf-8") as outfile:
         for path in files:
@@ -41,12 +43,12 @@ def data_for_training(content, config):
     print(f"Input chunk lengths: {outputs['length']}")
     print(f"Chunk mapping: {outputs['overflow_to_sample_mapping']}")
     ds = Dataset.from_dict(outputs)
-    ds_i = ds.remove_columns(["attention_mask", "length", "overflow_to_sample_mapping"])
+    ds_removed = ds.remove_columns(["attention_mask", "length", "overflow_to_sample_mapping"])
     tokenizer.pad_token = tokenizer.eos_token
     data_collator = DataCollatorForLanguageModeling(
         tokenizer, mlm=config["Training"]["masked_language_modelling"]
     )
-    return ds_i, data_collator
+    return ds_removed, data_collator
 
 
 def get_peft_model(config):
@@ -89,16 +91,20 @@ def create_trainer(config, train_data, data_collator, model):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Training script for PEFT model")
+    parser = argparse.ArgumentParser(description="Training script for P-tuning model")
     parser.add_argument(
-        "--config",type=str,required=True, help="Path to the YAML configuration file"
+        "--config", type=str, required=True, help="Path to the YAML configuration file"
     )
-    args=parser.parse_args()
+    args = parser.parse_args()
 
     with open(args.config, "r") as file:
         config = yaml.safe_load(file)
 
-    content = prepare_data(config["Data"]["repo_path"], config["Data"]["extensions"], config["Data"]["output_file"])
+    content = prepare_data(
+        config["Data"]["repo_path"],
+        config["Data"]["extensions"],
+        config["Data"]["output_file"],
+    )
 
     train_data, data_collator = data_for_training(content, config)
     model = get_peft_model(config)

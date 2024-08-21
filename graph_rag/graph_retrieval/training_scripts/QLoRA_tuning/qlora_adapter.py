@@ -22,7 +22,9 @@ def prepare_data(repo_path, extensions, output_file):
 
     files = []
     for ext in extensions:
-        files.extend(glob.glob(os.path.join(repo_path, "**", f"*.{ext}"), recursive=True))
+        files.extend(
+            glob.glob(os.path.join(repo_path, "**", f"*.{ext}"), recursive=True)
+        )
 
     with open(output_file, "w", encoding="utf-8") as outfile:
         for path in files:
@@ -34,6 +36,7 @@ def prepare_data(repo_path, extensions, output_file):
 
     with open(output_file, "r") as f:
         return f.read()
+
 
 def data_for_training(content, config):
     tokenizer = AutoTokenizer.from_pretrained(config["Model"]["model"])
@@ -49,41 +52,42 @@ def data_for_training(content, config):
     print(f"Input chunk lengths: {outputs['length']}")
     print(f"Chunk mapping: {outputs['overflow_to_sample_mapping']}")
     ds = Dataset.from_dict(outputs)
-    ds_i = ds.remove_columns(["attention_mask", "length", "overflow_to_sample_mapping"])
+    ds_removed = ds.remove_columns(["attention_mask", "length", "overflow_to_sample_mapping"])
     tokenizer.pad_token = tokenizer.eos_token
     data_collator = DataCollatorForLanguageModeling(
         tokenizer, mlm=config["Training"]["masked_language_modelling"]
     )
-    return ds_i, data_collator,tokenizer
+    return ds_removed, data_collator, tokenizer
+
 
 def load_base_model(config):
-    compute_dtype = getattr(torch,config['BNB_CONFIG']['BNB_4BIT_COMPUTE_DTYPE'])
+    compute_dtype = getattr(torch, config["BNB_CONFIG"]["BNB_4BIT_COMPUTE_DTYPE"])
 
     bnb_config = BitsAndBytesConfig(
         load_in_4bit=True,
         bnb_4bit_quant_type="nf4",
         bnb_4bit_compute_dtype=compute_dtype,
-        bnb_4bit_use_double_quant=config['BNB_CONFIG']['USE_NESTED_QUANT'],
+        bnb_4bit_use_double_quant=config["BNB_CONFIG"]["USE_NESTED_QUANT"],
     )
     device_map = {"": 0}
 
     model = AutoModelForCausalLM.from_pretrained(
-        config['MODEL']['MODEL'],
-        load_in_8bit=config['MODEL']['LOAD_IN_8BIT'],
+        config["MODEL"]["MODEL"],
+        load_in_8bit=config["MODEL"]["LOAD_IN_8BIT"],
         quantization_config=bnb_config,
         device_map=device_map,
         use_cache=False,
         trust_remote_code=True,
-
     )
     return model
 
-def load_peft_model(model,config):
+
+def load_peft_model(model, config):
     model = prepare_model_for_kbit_training(model)
     peft_config = LoraConfig(
-        lora_alpha=config['LORA']['LORA_ALPHA'],
-        lora_dropout=config['LORA']['LORA_DROPOUT'],
-        r=config['LORA']['LORA_R'],
+        lora_alpha=config["LORA"]["LORA_ALPHA"],
+        lora_dropout=config["LORA"]["LORA_DROPOUT"],
+        r=config["LORA"]["LORA_R"],
         bias="none",
         task_type="CAUSAL_LM",
         # target_modules=,
@@ -92,6 +96,7 @@ def load_peft_model(model,config):
     model.print_trainable_parameters()
     return model
 
+
 def create_training_arguments(config):
     training_args = TrainingArguments(
         output_dir=f"results/{config['TRAINING_ARGUMENTS']['OUTPUT_DIR']}",
@@ -99,26 +104,27 @@ def create_training_arguments(config):
         dataloader_drop_last=True,
         evaluation_strategy="steps",
         save_strategy="steps",
-        eval_steps=config['TRAINING_ARGUMENTS']['EVAL_FREQ'],
-        save_steps=config['TRAINING_ARGUMENTS']['SAVE_FREQ'],
-        logging_steps=config['TRAINING_ARGUMENTS']['LOG_FREQ'],
+        eval_steps=config["TRAINING_ARGUMENTS"]["EVAL_FREQ"],
+        save_steps=config["TRAINING_ARGUMENTS"]["SAVE_FREQ"],
+        logging_steps=config["TRAINING_ARGUMENTS"]["LOG_FREQ"],
         per_device_train_batch_size=64,
         per_device_eval_batch_size=64,
-        learning_rate=config['TRAINING_ARGUMENTS']['LR'],
-        lr_scheduler_type=config['TRAINING_ARGUMENTS']['LR_SCHEDULER_TYPE'],
-        warmup_steps=config['TRAINING_ARGUMENTS']['NUM_WARMUP_STEPS'],
-        gradient_accumulation_steps=config['TRAINING_ARGUMENTS']['GR_ACC_STEPS'],
+        learning_rate=config["TRAINING_ARGUMENTS"]["LR"],
+        lr_scheduler_type=config["TRAINING_ARGUMENTS"]["LR_SCHEDULER_TYPE"],
+        warmup_steps=config["TRAINING_ARGUMENTS"]["NUM_WARMUP_STEPS"],
+        gradient_accumulation_steps=config["TRAINING_ARGUMENTS"]["GR_ACC_STEPS"],
         gradient_checkpointing=True,
-        fp16=config['TRAINING_ARGUMENTS']['FP16'],
-        bf16=config['TRAINING_ARGUMENTS']['BF16'],
-        weight_decay=config['TRAINING_ARGUMENTS']['WEIGHT_DECAY'],
+        fp16=config["TRAINING_ARGUMENTS"]["FP16"],
+        bf16=config["TRAINING_ARGUMENTS"]["BF16"],
+        weight_decay=config["TRAINING_ARGUMENTS"]["WEIGHT_DECAY"],
         # push_to_hub=True,
         include_tokens_per_second=True,
     )
     return training_args
 
+
 def create_trainer(tokenizer, train_data, data_collator, model):
-    training_args=create_training_arguments()
+    training_args = create_training_arguments()
     trainer = Trainer(
         model=model,
         tokenizer=tokenizer,
@@ -131,11 +137,13 @@ def create_trainer(tokenizer, train_data, data_collator, model):
 
 
 def main():
-    parser=argparse.ArgumentParser(description="Training script for QLoRA adapter tuning")
-    parser.add_argument(
-        "--config",type=str, required=True,help="Path to the YAML configuration file"
+    parser = argparse.ArgumentParser(
+        description="Training script for QLoRA adapter tuning"
     )
-    args=parser.parse_args()
+    parser.add_argument(
+        "--config", type=str, required=True, help="Path to the YAML configuration file"
+    )
+    args = parser.parse_args()
 
     with open(args.config, "r") as file:
         config = yaml.safe_load(file)
@@ -143,7 +151,7 @@ def main():
     content = prepare_data(
         config["Data"]["repo_path"],
         config["Data"]["extensions"],
-        config["Data"]["output_file"]
+        config["Data"]["output_file"],
     )
 
     train_data, data_collator, tokenizer = data_for_training(content, config)
@@ -156,7 +164,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-
