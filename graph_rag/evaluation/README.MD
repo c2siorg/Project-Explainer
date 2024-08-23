@@ -9,20 +9,87 @@ This module provides methods to evaluate the performance of GraphRag. The follow
 Additionally, this module includes scripts for creating custom test datasets to benchmark and evaluate GraphRag.
 
 ## Getting Started
+This section demonstrates how to use the functions provided in the module:
 
-### Evaluating Your Knowledge Graph
+---
+
+### QA Generation and Critique
+
+This module offers tools to generate question-answer (QA) pairs from input documents using a language model and critique them based on various criteria like groundedness, relevance, and standalone quality.
+
+#### Generate and Critique QA Pairs
+
+To use this module, follow these steps:
+
+#### 1. Generate QA Pairs
+
+First, we prepare our dataset for generating QA pairs. In this example, we'll use Keras-IO documentation and Llama-Index's `SimpleDirectoryReader` to obtain `Document` objects.
+
+```python
+!git clone https://github.com/keras-team/keras-io.git
+
+def get_data(input_dir="path/to/keras-io/templates"):
+    reader = SimpleDirectoryReader(
+        input_dir, 
+        recursive=True, 
+        exclude=["path/to/keras-io/templates/examples"]
+    )
+    docs = reader.load_data()
+
+    splitter = SentenceSplitter(
+        chunk_size=300,
+        chunk_overlap=20,
+    )
+    nodes = splitter.get_nodes_from_documents(docs)
+    documents = [Document(text=node.text, metadata=node.metadata) for node in nodes]
+    
+    return docs
+    
+# load the documents
+documents=get_data()
+```
+
+Use the `qa_generator` function to generate QA pairs from your input documents.
+
+```python
+from evaluation.ragas_evaluation.QA_graphrag_testdataset import qa_generator
+
+N_GENERATIONS = 20
+
+# Generate the QA pairs
+qa_pairs = qa_generator(documents, N_GENERATIONS)
+```
+
+#### 2. Critique the Generated QA Pairs
+
+Once you have generated the QA pairs, critique them using the `critique_qa` function.
+
+```python
+from evaluation.ragas_evaluation.QA_graphrag_testdatasete import critique_qa
+
+# Critique the generated QA pairs
+critiqued_qa_pairs = critique_qa(qa_pairs)
+
+# The critiqued pairs will include scores and evaluations for groundedness, relevance, and standalone quality
+```
+
+---
+
+
+
+### Evaluating Your Knowledge Graph with Ragas backend
 
 You can easily evaluate the performance of your query engine using this module.
 
-#### 1. Load and Evaluate Your Dataset
+#### 1. Load and Evaluate Your Dataset 
 
 Use the `load_test_dataset` function to load your dataset and directly evaluate it using the `evaluate` function. This method handles all necessary steps, including batching the data.
 
 ```python
-from your_module import load_test_dataset, evaluate
+from evaluation.ragas_evaluation.evaluation_ragas load_test_dataset, evaluate
 
 # Step 1: Load the dataset from a pickle file
-dataset_path = "random/dataset_200_llama3.pkl"
+dataset_path = "/content/keras_docs_embedded.pkl"
 test_dataset = load_test_dataset(dataset_path)
 ```
 
@@ -30,6 +97,9 @@ test_dataset = load_test_dataset(dataset_path)
 
 ```python
 # Step 2: Define the language model and embedding
+from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+from llama_index.llms.ollama import Ollama
+
 llm = Ollama(base_url="http://localhost:11434", model="codellama")
 embedding = HuggingFaceEmbedding(model_name="microsoft/codebert-base")
 
@@ -39,7 +109,7 @@ metrics = [faithfulness, answer_relevancy, context_precision, context_recall]
 # Step 4: Load the query engine (Llama-Index)
 from graph_rag.graph_retrieval.graph_retrieval import get_index_from_pickle, get_query_engine
 
-index = get_index_from_pickle("/content/Results/graphIndex.pkl")
+index = get_index_from_pickle("path/to/graphIndex.pkl")
 query_engine = get_query_engine(index)
 
 # Step 5: Evaluate the dataset

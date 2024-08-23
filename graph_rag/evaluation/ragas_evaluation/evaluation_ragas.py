@@ -41,11 +41,11 @@ def load_test_dataset(
             dataset = pickle.load(f)
     except EOFError:
         print("EOFError: The file may be corrupted or incomplete loading empty dictionary.")
-        dataset = {}
+        dataset = []
     return dataset
 
 
-def slice_data(i: int, k: int, dataset: dict):
+def slice_data(i: int, k: int, dataset: list):
     """
         Slices the dataset into smaller chunks for batch processing.
 
