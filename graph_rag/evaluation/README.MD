@@ -13,7 +13,7 @@ This section demonstrates how to use the functions provided in the module:
 
 ---
 
-### QA Generation and Critique
+ ### 1. QA Generation and Critique
 
 This module offers tools to generate question-answer (QA) pairs from input documents using a language model and critique them based on various criteria like groundedness, relevance, and standalone quality.
 
@@ -77,7 +77,7 @@ critiqued_qa_pairs = critique_qa(qa_pairs)
 
 
 
-### Evaluating Your Knowledge Graph with Ragas backend
+### 2. Evaluating Your Knowledge Graph with Ragas backend
 
 You can easily evaluate the performance of your query engine using this module.
 
