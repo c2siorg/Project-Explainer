@@ -17,7 +17,7 @@ This section demonstrates how to use the functions provided in the module:
 
 This module offers tools to generate question-answer (QA) pairs from input documents using a language model and critique them based on various criteria like groundedness, relevance, and standalone quality.
 
-#### Generate and Critique QA Pairs
+> #### Generate and Critique QA Pairs
 
 To use this module, follow these steps:
 
@@ -81,7 +81,7 @@ critiqued_qa_pairs = critique_qa(qa_pairs)
 
 You can easily evaluate the performance of your query engine using this module.
 
-#### 1. Load and Evaluate Your Dataset 
+> #### Load and Evaluate Your Dataset
 
 Use the `load_test_dataset` function to load your dataset and directly evaluate it using the `evaluate` function. This method handles all necessary steps, including batching the data.
 
