@@ -74,14 +74,61 @@ critiqued_qa_pairs = critique_qa(qa_pairs)
 ```
 
 ---
+### 2. Evaluating Your Knowledge Graph with Llama-Index Evaluator Pack
+
+This section demonstrates how to evaluate the performance of your query engine using the Llama-Index RAG evaluator pack.
+
+> #### Evaluate Your Knowledge Graph with llama-index
+
+To evaluate your query engine, follow these steps:
+```shell
+llamaindex-cli download-llamadataset PaulGrahamEssayDataset --download-dir ./data
+```
+
+```python
+from evaluation.evaluation_llama_index import evaluate
+
+
+# Path to your labeled RAG dataset
+RAG_DATASET = "./data/rag_dataset.json"
+
+# Define the language model and embedding
+from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+from llama_index.llms.ollama import Ollama
+
+llm = Ollama(base_url="http://localhost:11434", model="llama2")
+embedding = HuggingFaceEmbedding(model_name="microsoft/codebert-base")
+
+# Your query engine instance
+from graph_rag.graph_retrieval.graph_retrieval import get_index_from_pickle, get_query_engine
+
+index = get_index_from_pickle("path/to/graphIndex.pkl")
+query_engine = get_query_engine(index)
+
+# Evaluate the dataset
+evaluation_results = evaluate(RAG_DATASET, query_engine)
+
+# Review the results
+print(evaluation_results)
+```
+| Metrics                      | RAG        | Base RAG  |
+|------------------------------|------------|-----------|
+| **Mean Correctness Score**    | 3.340909   |         0.934  |
+| **Mean Relevancy Score**      | 0.750000   |    4.239       |
+| **Mean Faithfulness Score**   | 0.386364   |   0.977        |
+| **Mean Context Similarity Score** | 0.948765 |     0.977      |
 
 
 
-### 2. Evaluating Your Knowledge Graph with Ragas backend
+This example shows how to quickly evaluate your query engine's performance using the Llama-Index RAG evaluator pack.
+
+
+---
+### 3. Evaluating Your Knowledge Graph with Ragas backend
 
 You can easily evaluate the performance of your query engine using this module.
 
-> #### Load and Evaluate Your Dataset
+> #### Load and Evaluate Your Dataset with ragas
 
 Use the `load_test_dataset` function to load your dataset and directly evaluate it using the `evaluate` function. This method handles all necessary steps, including batching the data.
 

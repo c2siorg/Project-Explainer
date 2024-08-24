@@ -12,7 +12,7 @@ from llama_index.llms.ollama import Ollama
 from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 
 
-RagEvaluatorPack = download_llama_pack("RagEvaluatorPack", "./rag_evaluator_pack")
+
 
 
 def evaluate(
@@ -33,6 +33,8 @@ def evaluate(
     Returns:
         A DataFrame containing the benchmarking results, including LLM calls and evaluations.
     """
+
+    RagEvaluatorPack = download_llama_pack("RagEvaluatorPack", "./rag_evaluator_pack")
     rag_dataset = LabelledRagDataset.from_json(RAG_DATASET)
     rag_evaluator_pack = RagEvaluatorPack(
         rag_dataset=rag_dataset,
