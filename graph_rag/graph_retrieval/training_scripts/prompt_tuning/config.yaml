@@ -1,0 +1,20 @@
+Data:
+  repo_path : '/content/keras-io/templates'
+  extensions : ['md']
+  output_file : 'merged_output.txt'
+ModeL:
+  model: 'bigcode/starcoderbase-1b'
+  context_length: 128
+Training:
+  masked_language_modelling: False
+  num_virtual_tokens : 4
+  num_epochs : 6
+  learning_rate: 0.0035
+  output_dir: "/"
+  max_steps: 4
+  batch_size: 25
+  auto_batch_size : False
+  push_to_hub: False
+
+
+

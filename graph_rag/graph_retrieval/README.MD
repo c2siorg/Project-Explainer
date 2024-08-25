@@ -41,4 +41,37 @@ from graph_rag.graph_retrieval.graph_retrieval import graph_query
 response = graph_query("Your query here", query_engine)
 print(response)
 ```
+## Advanced Training with QLoRA and P-Tuning
+
+>fine-tuning LLMs on data(masked language or Next toke Prediction) for few epochs, may result in better retrieval and response
+
+### 1. Setup
+
+To use QLoRA and P-Tuning, ensure your environment is set up with the required libraries and that your model and dataset configurations are defined in a `config.yaml` file.
+
+### 2. Finetuning with QLoRA
+
+Use the QLoRA method for efficient fine-tuning by passing the appropriate configurations in your `config.yaml`. This method is ideal when working with large models on limited hardware.
+
+```bash
+python qlora_adapter.py --config path/to/config.yaml
+```
+Execute the training script with the `--config` argument to specify your configuration file:
+
+### 3. Fine-Tuning with P-Tuning 
+
+P-Tuning allows for parameter-efficient prompt-based fine-tuning. Adjust the number of virtual tokens and other related parameters in the `config.yaml` to customize the training process.
+
+```bash
+python p_tuning.py--config path/to/config.yaml
+```
+Execute the training script with the `--config` argument to specify your configuration file:
+
+
+
+
+
+
+This will start the training process using the specified method (QLoRA or P-Tuning) and configurations.
+
 
