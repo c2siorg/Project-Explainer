@@ -19,14 +19,14 @@ A python module that is capable of providing different levels of summary for the
 
 #### Installation
 
-```
-pip install git+https://github.com/c2siorg/Project-Explainer.git@main#subdirectory=project_explainer&egg=gh_explainer
+```bash
+bash build.sh
 ```
 
 #### Example usage
 
 ```python
-from project_explainer import Explainer
+from gh_explainer import Explainer
 
 gptExplainer = Explainer("gpt2")
 
@@ -43,12 +43,6 @@ print(gptExplainer.brief("https://github.com/c2siorg/Project-Explainer.git"))
 
 Use project explainer as UI
 
-#### Dependencies
-
-```
-pip install -r project_explainer_ui/requirements.txt
-```
-
 #### Example usage
 
 ```
@@ -64,8 +58,8 @@ A simple python module packed with utilities to process files in a project repos
 
 #### Installation
 
-```
-pip install git+https://github.com/c2siorg/Project-Explainer.git@main#subdirectory=project_processor&egg=gh_processor
+```bash
+bash build.sh
 ```
 
 #### Example usage

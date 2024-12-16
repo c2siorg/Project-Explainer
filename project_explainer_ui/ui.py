@@ -1,5 +1,5 @@
 import gradio as gr
-from gh_explainer import Explainer
+from project_explainer.gh_explainer import Explainer
 
 def summarize(summarization_type, github_project_url, github_project_branch="main", huggingface_model_id="gpt2"):
     gptExplainer = Explainer(huggingface_model_id)

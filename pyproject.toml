@@ -3,17 +3,17 @@ requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "gh_processor"
-description = "github repo file level processor utils"
+name = "gh_explainer"
+description = "explains a give github repo"
 readme = "README.md"
 requires-python = ">=3.7"
 license = {text = "Apache 2.0"}
 classifiers = [
     "Programming Language :: Python :: 3",
 ]
-dependencies = ["setuptools>=42", "wheel", "gitpython", "markdown2", "spacy"]
+dependencies = ["setuptools>=42", "wheel", "transformers", "jinja2", "torch", "gitpython", "markdown2", "spacy", "gradio"]
 
 dynamic = ["version"]
 
 [tool.setuptools]
-py-modules = ["gh_processor"]
+packages = { find = { where = ["project_explainer", "project_processor"] } }

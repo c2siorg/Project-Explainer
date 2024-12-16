@@ -26,9 +26,12 @@ def download_github_repo(repo_url: str, branch: str = "main") -> str:
         repo_path (str): Absolute path to downloaded repo
     """
     repo_name = repo_url.split("/")[-1].split(".")[0]
-    repo_path = os.path.abspath(repo_name)
+    repo_path = f"./repos/{repo_name}"
+    
+    if not os.path.exists("./repos/"):
+        os.makedirs("./repos/")
 
-    Repo.clone_from(repo_url, repo_name, branch=branch)
+    Repo.clone_from(repo_url, to_path=repo_path, branch=branch)
 
-    logger.info(f"Repository '{repo_name}' downloaded successfully!")
+    logger.info(f"Repository '{repo_name}' downloaded successfully at {repo_path}!")
     return repo_path

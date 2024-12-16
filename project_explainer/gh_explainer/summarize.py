@@ -1,6 +1,6 @@
 
 from transformers import AutoTokenizer, AutoModelForCausalLM, AutoModelForSeq2SeqLM
-from gh_processor import (download_github_repo, 
+from project_processor.gh_processor import (download_github_repo, 
                                extract_project_description_from_readme, 
                                extract_headings_with_paragraphs_from_markdown,
                                remove_tables_from_markdown,
@@ -8,6 +8,7 @@ from gh_processor import (download_github_repo,
                                remove_images_from_markdown,
                                remove_links_from_markdown)
 import os
+from git import rmtree
 from jinja2 import Template
 
 
@@ -75,8 +76,8 @@ class Explainer():
         Raises:
             TypeError: If the prompt is not a string.
         """
-        inputs=self.tokenizer.encode(prompt, return_tensors='pt', max_length=1024, truncation=True)
-        output = self.model.generate(inputs, min_length=256, max_length=512)
+        inputs=self.tokenizer.encode(prompt, return_tensors='pt', max_length=self.tokenizer.model_max_length, truncation=True)
+        output = self.model.generate(inputs, min_length=256, max_length=self.tokenizer.model_max_length)
         return self.tokenizer.decode(output[0], skip_special_tokens=True)
 
     def brief(self, github_url: str, branch: str = "main") -> dict:
@@ -101,6 +102,10 @@ class Explainer():
         prompt = {"prompt": project_description}
         prepared_prompt = self._fill_template(self.brief_prompt_template, prompt)
         summary=self._model_gen(prepared_prompt)
+
+        # Delete the repo
+        rmtree(repo_path)
+
         return {"prompt": prompt, "prepared_prompt": prepared_prompt, "summary": str(summary)}
     
     def outline(self, github_url: str, branch: str = "main") -> dict:
