@@ -1,0 +1,30 @@
+# Core AI and Project Explainer Modules
+transformers
+torch
+jinja2
+setuptools
+wheel
+spacy
+
+# Repository and File Processing
+gitpython
+markdown2
+
+# UI and Frontend
+gradio
+
+# Graph RAG and Knowledge Graph System
+llama-index
+llama-index-embeddings-huggingface
+llama-index-llms-ollama
+pyvis
+tree-sitter==0.21.3
+tree-sitter-languages
+tqdm
+ragas
+datasets
+pandas
+
+# AI Framework Integration (Optional/Experimental)
+langchain
+openai
