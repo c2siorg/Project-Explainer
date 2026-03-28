@@ -1,15 +1,53 @@
 <div align="center">
   <img alt="project explainer" src="static/logos/logo.svg" width=300>
 
+  [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+  [![Python](https://img.shields.io/badge/Python-3.8%2B-green.svg)](https://www.python.org/)
+
 [Project Explainer (as module)](#project-explainer-as-module) •
 [Project Explainer (as ui)](#project-explainer-as-ui) •
-[Project Repository Utilities (gh_processor py module)](#project-repository-utilities-gh_processor-py-module)
+[Project Repository Utilities](#project-repository-utilities-gh_processor-py-module)
 </div>
 
 <br/>
 
+
 Large Language Models are picking pace very quickly and they are turning out to be extremely good in multiple tasks. With the help of zero-shot, few-shot, and fine tuning techniques we could effectively specialize a language model for the use case. Summarization is one such use case that has been widely researched for a couple of years now. Broadly there are techniques such as Abstractive and Extractive approaches. The motive of this project proposal is to handle the summarization task (mostly Abstractive + Extractive hybrid approach) through the language model’s (foundation model) lens. This project aims to cover everything from data collection, EDA, experimenting with different language models to developing production-scale system that can take GitHub repo as reference and provide summary. One of the challenges that is novel is to use smaller sized models to achieve great performance in summarization. SCoRe Lab has been into developing solutions in the space of making user life easier with products such as D4D, Bassa, Track Pal, and others. This project will add to that portfolio and would be a great reference for AI practitioners and system developers which aims to work right from data to production-grade end product using AI and Systems. This repository will hold, data/data references, experiments, and a system that takes GitHub Link as input and provides a summary for the repository.
 
+
+## 📋 Requirements
+
+To run this project, you need **Python 3.8+** and the following dependencies:
+
+*   **Core**: `transformers`, `torch`, `jinja2`, `setuptools`, `wheel`
+*   **Processing**: `gitpython`, `markdown2`, `spacy`
+*   **UI**: `gradio`
+*   **Graph RAG**: `llama-index`, `ragas`, `tree-sitter`, `pyvis`, `pandas`
+*   **Optional/Experimental**: `langchain`, `openai`
+
+You can install all dependencies at once using:
+```bash
+pip install -r requirements.txt
+```
+
+## 🚀 Getting Started
+
+1.  **Clone the Repository**:
+    ```bash
+    git clone https://github.com/c2siorg/Project-Explainer.git
+    cd Project-Explainer
+    ```
+
+2.  **Install the Core Modules**:
+    ```bash
+    pip install ./project_explainer
+    pip install ./project_processor
+    ```
+
+3.  **Run the UI**:
+    ```bash
+    python project_explainer_ui/ui.py
+    ```
 
 ## Tools
 
@@ -35,9 +73,14 @@ print(gptExplainer.brief("https://github.com/c2siorg/Project-Explainer.git"))
 
 #### Output
 
+```json
+{
+  "prompt": { "prompt": "Project-Explainer Large Language Models are..." },
+  "prepared_prompt": "Project-Explainer ... Explain the above : ",
+  "summary": "The goal of this project is to provide a simple, easy to use, and very fast way to summarize a language model using abstractive and extractive hybrid approaches."
+}
 ```
-{'prompt': {'prompt': 'Project-Explainer Large Language Models are picking pace very quickly and they are turning out to be extremely good in multiple tasks. With the help of zero-shot, few-shot, and fine tuning techniques we could effectively specialize a language model for the use case. Summarization is one such use case that has been widely researched for a couple of years now. Broadly there are techniques such as Abstractive and Extractive approaches. The motive of this project proposal is to handle the summarization task (mostly Abstractive + Extractive hybrid approach) through the language model’s (foundation model) lens. This project aims to cover everything from data collection, EDA, experimenting with different language models to developing production-scale system that can take GitHub repo as reference and provide summary. One of the challenges that is novel is to use smaller sized models to achieve great performance in summarization. SCoRe Lab has been into developing solutions in the space of making user life easier with products such as D4D, Bassa, Track Pal, and others. This project will add to that portfolio and would be a great reference for AI practitioners and system developers which aims to work right from data to production-grade end product using AI and Systems. This repository will hold, data/data references, experiments, and a system that takes GitHub Link as input and provides a summary for the repository.'}, 'prepared_prompt': 'Project-Explainer Large Language Models are picking pace very quickly and they are turning out to be extremely good in multiple tasks. With the help of zero-shot, few-shot, and fine tuning techniques we could effectively specialize a language model for the use case. Summarization is one such use case that has been widely researched for a couple of years now. Broadly there are techniques such as Abstractive and Extractive approaches. The motive of this project proposal is to handle the summarization task (mostly Abstractive + Extractive hybrid approach) through the language model’s (foundation model) lens. This project aims to cover everything from data collection, EDA, experimenting with different language models to developing production-scale system that can take GitHub repo as reference and provide summary. One of the challenges that is novel is to use smaller sized models to achieve great performance in summarization. SCoRe Lab has been into developing solutions in the space of making user life easier with products such as D4D, Bassa, Track Pal, and others. This project will add to that portfolio and would be a great reference for AI practitioners and system developers which aims to work right from data to production-grade end product using AI and Systems. This repository will hold, data/data references, experiments, and a system that takes GitHub Link as input and provides a summary for the repository.\nExplain the above : ', 'summary': 'Project-Explainer Large Language Models are picking pace very quickly and they are turning out to be extremely good in multiple tasks. With the help of zero-shot, few-shot, and fine tuning techniques we could effectively specialize a language model for the use case. Summarization is one such use case that has been widely researched for a couple of years now. Broadly there are techniques such as Abstractive and Extractive approaches. The motive of this project proposal is to handle the summarization task (mostly Abstractive + Extractive hybrid approach) through the language model’s (foundation model) lens. This project aims to cover everything from data collection, EDA, experimenting with different language models to developing production-scale system that can take GitHub repo as reference and provide summary. One of the challenges that is novel is to use smaller sized models to achieve great performance in summarization. SCoRe Lab has been into developing solutions in the space of making user life easier with products such as D4D, Bassa, Track Pal, and others. This project will add to that portfolio and would be a great reference for AI practitioners and system developers which aims to work right from data to production-grade end product using AI and Systems. This repository will hold, data/data references, experiments, and a system that takes GitHub Link as input and provides a summary for the repository.\nExplain the above : \xa0The goal of this project is to provide a simple, easy to use, and very fast way to summarize a language model. The goal of this project is to provide a simple, easy to use, and very fast way to summarize a language model. The goal of this project is to provide a simple, easy to use, and very fast way to summarize a language model. The goal of this project is to provide a simple, easy to use, and very fast way to summarize a language model. The goal of this project is to provide a simple, easy to use, and very fast way to summarize a language model. The goal of this project is to provide a simple, easy to use, and very fast way to summarize a language model. The goal of this project is to provide a simple, easy to use, and very fast way to summarize a language model. The goal of this project is to provide a simple, easy to use, and very fast way to summarize a language model. The goal of this project is to provide a simple, easy to use, and very fast way to summarize a language model.'}
-```
+
 
 ### Project Explainer (as ui)
 
@@ -92,8 +135,18 @@ for markdown_file in markdown_files:
 print(headings_with_content)
 ```
 
-Output
+## 🤝 Contributing
 
-```
-{'/Users/sripravallika/Project-Explainer/Project-Explainer/README.md': {'Project-Explainer': 'Large Language Models are picking pace very quickly and they are turning out to be extremely good in multiple tasks. With the help of zero-shot, few-shot, and fine tuning techniques we could effectively specialize a language model for the use case. Summarization is one such use case that has been widely researched for a couple of years now. Broadly there are techniques such as Abstractive and Extractive approaches. The motive of this project proposal is to handle the summarization task (mostly Abstractive + Extractive hybrid approach) through the language model’s (foundation model) lens. This project aims to cover everything from data collection, EDA, experimenting with different language models to developing production-scale system that can take GitHub repo as reference and provide summary. One of the challenges that is novel is to use smaller sized models to achieve great performance in summarization. SCoRe Lab has been into developing solutions in the space of making user life easier with products such as D4D, Bassa, Track Pal, and others. This project will add to that portfolio and would be a great reference for AI practitioners and system developers which aims to work right from data to production-grade end product using AI and Systems. This repository will hold, data/data references, experiments, and a system that takes GitHub Link as input and provides a summary for the repository.'}}
-```
+Contributions are welcome! If you'd like to help improve Project Explainer, please:
+
+1.  **Fork** the repository.
+2.  **Create a branch** for your changes: `git checkout -b feature/your-feature-name`.
+3.  **Commit** your changes: `git commit -m 'Add some feature'`.
+4.  **Push** to your branch: `git push origin feature/your-feature-name`.
+5.  **Submit a Pull Request**.
+
+For major changes, please open an issue first to discuss what you would like to change.
+
+## 📄 License
+
+This project is licensed under the **Apache License 2.0** - see the [LICENSE](LICENSE) file for details.
